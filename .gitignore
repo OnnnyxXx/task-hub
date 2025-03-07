@@ -3,3 +3,5 @@ client/dist
 client/dist-ssr
 
 .idea
+coolsite/db.sqlite3
+main.py
