@@ -2,527 +2,9 @@
 
 {% block title %}TS{% endblock %}
 
+
 {% block content %}
 
-<style>
-    .profile-picture {
-          height: 178px;
-          width: 189px;
-          background: linear-gradient(90deg, #ff9966, #ff5e62);
-          z-index: 10;
-          box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
-          border-radius: 100%;
-          margin-right: 15px;
-          text-align: center;
-          margin: 10px auto 20px;
-        }
-
-    .profile-card{
-      background: #1F2833;
-      border-radius: 50px;
-      align-items: center;
-      border: 1px solid black;
-      padding: 20px;
-
-      justify-content: space-between;
-    }
-
-    .profile-card.h3{
-        color: white;
-    }
-
-    a {
-        text-decoration: none; /* Убираем подчеркивание ссылок */
-        color: #333;
-    }
-    .card a{
-        text-decoration: none;
-        color: #66FCF1;
-    }
-    h2 {
-        text-align: center;
-        color: black;
-    }
-
-    .slider {
-      display: flex;
-      flex-direction: row;
-      height: 328px;
-      overflow: hidden;
-    }
-
-    .slider .profile-card {
-      width: 300px;
-      margin-right: 20px;
-      animation: slide-left 25s linear infinite;
-    }
-
-    .features {
-        padding: 1em;
-        padding: 1em;
-        width: 89%;
-        margin: auto;
-        text-align: center;
-        box-sizing: content-box;
-    }
-
-    @keyframes slide-left {
-       0% { transform: translateX(300%); }
-       100% { transform: translateX(calc(-400px * var(--count))); }
-    }
-
-
-    .wrapper {
-      position: relative;
-      perspective: 70em;
-      display: grid;
-      transform-style: preserve-3d;
-    }
-
-    .card {
-      grid-area: 1 / 1;
-      transform: translateX(10px) rotateY(25deg) rotateX(10deg);
-      background: #1F2833;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 30px;
-      color: #000;
-      text-transform: uppercase;
-      font-size: 60px;
-      font-weight: 900;
-      backface-visibility: hidden;
-      box-shadow: 0 10px 30px -3px rgba(0,0,0,.1);
-    }
-
-    h1 {
-      font-size: 60px;
-      font-weight: 900;
-
-    }
-    .card .enclosed {
-      background: #0B0C10;
-      line-height: 1;
-      color:  #C5C6C7;
-      padding: 0 5px;
-      display: inline-block;
-      transform: translate(-1px, 1px) scale(0.75);
-      transform-origin: right center;
-    }
-
-
-    .wrapper:before {
-      --bw: 9px;
-      grid-area: 1 / 1;
-      content: '';
-      backface-visibility: hidden;
-      height: 100%;
-      width: 100%;
-      margin-top: calc(-1 * var(--bw));
-      margin-left: calc(-1 * var(--bw));
-      background: transparent;
-      transform: translateX(-60px) rotateY(-30deg) rotateX(15deg) scale(1.03);
-      pointer-events: none;
-      border: var(--bw) solid #000;
-      box-sizing: content-box;
-    }
-
-
-    .wrapper:hover > div,
-    .wrapper:hover:before {
-      transform: none;
-    }
-
-
-    .wrapper > div,
-    .wrapper:before {
-      will-change: transform;
-      transition: .3s transform cubic-bezier(.25,.46,.45,1);
-    }
-
-
-    .center{
-        padding: 160px;
-    }
-
-    .thebest{
-        margin: 42px;
-        border-radius: 32px;
-        background: linear-gradient(-45deg, #000000,  #66FCF1, #3586ff, #03fbfb);
-        background-size: 400% 400%;
-        animation: gradient 15s ease infinite;
-    }
-        @keyframes gradient {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-
-
-    linear-gradient(90deg, #4ba3c6, #201e68)
-    :root {
-      --var-bgcolor: #fff;
-      --var-fontcolor: #000;
-        }
-
-    @media screen and (max-width: 767px){
-    .center h1{
-            font-size: 34px;
-            font-weight: 900;
-            padding: 18px;
-            margin-top: -57px;
-            margin-left: 2px;
-         }
-    .center {
-           padding: 24px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-        }
-      .wrapper {
-          position: relative;
-          perspective: 40em;
-          display: grid;
-          transform-style: preserve-3d;
-          justify-content: center;
-          align-items: center;
-      }
-
-      .card {
-        text-align: center;
-        font-size: 40px;
-        margin: -15px;
-        margin-top: 7px;
-      }
-      .wrapper:before {
-      --bw: 9px;
-      grid-area: 1 / 1;
-      content: '';
-      backface-visibility: hidden;
-      height: 100%;
-      width: 100%;
-      margin-top: calc(-1 * var(--bw));
-      margin-left: calc(-1 * var(--bw));
-      background: transparent;
-      transform: translateX(-60px) rotateY(-30deg) rotateX(15deg) scale(1.03);
-      pointer-events: none;
-      margin-left: -5px;
-      padding: 21px;
-    }
-    }
-
-
-            .slider-container {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                height: 41vh;
-                background-color: #0B0C10;
-                color: white;
-                text-align: center;
-                border-radius: 50px;
-                margin-top: 38px;
-                margin: 40px;
-            }
-
-            .slide {
-                display: none;
-                padding: 20px;
-                width: 100%;
-            }
-
-            .active {
-                display: block;
-            }
-
-            .slider-nav {
-                text-align: center;
-                margin-top: 20px;
-            }
-
-            .slider-nav button {
-                background-color: #4CAF50;
-                border: none;
-                color: white;
-                padding: 10px 20px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 0 5px;
-                cursor: pointer;
-            }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
-
-
-    .footer {
-      position: relative;
-      width: 100%;
-      background: #3586ff;
-      min-height: 100px;
-      padding: 20px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-
-
-
-    .social-icon__item:nth-child(1) ion-icon {
-      content: url('https://phonoteka.org/uploads/posts/2023-03/1679571687_phonoteka-org-p-logotip-telegramma-art-pinterest-37.png');
-    }
-
-
-    .social-icon__item:nth-child(2) ion-icon {
-      content: url('https://static.tildacdn.com/tild6330-6337-4534-a361-323935643731/noroot.png');
-    }
-
-    .social-icon,
-    .menu {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 10px 0;
-      flex-wrap: wrap;
-    }
-
-    .social-icon__item,
-    .menu__item {
-      list-style: none;
-    }
-
-
-    .social-icon__link,
-    .menu__link {
-      font-size: 1.2rem;
-      color: #fff;
-      margin: 0 10px;
-      display: inline-block;
-      transition: 0.5s;
-    }
-
-    .social-icon__link:hover {
-      transform: translateY(-10px);
-    }
-
-    .menu__link {
-      font-size: 1.2rem;
-      color: #fff;
-      margin: 0 10px;
-      display: inline-block;
-      transition: 0.5s;
-      text-decoration: none;
-      opacity: 0.75;
-      font-weight: 300;
-    }
-
-    .menu__link:hover {
-      opacity: 1;
-    }
-
-    .footer p {
-      color: #fff;
-      margin: 15px 0 10px 0;
-      font-size: 1rem;
-      font-weight: 300;
-    }
-
-    .wave {
-        position: absolute;
-        top: -42px;
-        left: 0;
-        width: 100%;
-        height: 42px;
-        background: url(https://i.ibb.co/wQZVxxk/wave.png);
-        background-size: 1000px 100px;
-    }
-
-    .wave#wave1 {
-      z-index: 1000;
-      opacity: 1;
-      bottom: 0;
-      animation: animateWaves 4s linear infinite;
-    }
-
-    .wave#wave2 {
-      z-index: 999;
-      opacity: 0.5;
-      bottom: 10px;
-      animation: animate 4s linear infinite !important;
-    }
-
-    .wave#wave3 {
-      z-index: 1000;
-      opacity: 0.2;
-      bottom: 15px;
-      animation: animateWaves 3s linear infinite;
-    }
-
-    .wave#wave4 {
-      z-index: 999;
-      opacity: 0.7;
-      bottom: 20px;
-      animation: animate 3s linear infinite;
-    }
-
-    @keyframes animateWaves {
-      0% {
-        background-position-x: 1000px;
-      }
-      100% {
-        background-positon-x: 0px;
-      }
-    }
-
-    @keyframes animate {
-      0% {
-        background-position-x: -1000px;
-      }
-      100% {
-        background-positon-x: 0px;
-      }
-    }
-
-
-    .donation-link {
-      position: relative;
-      display: inline-block;
-    }
-
-    .donation-link a {
-      display: block;
-    }
-
-    .donate-icon {
-      position: fixed;
-      bottom: 80px;
-      right: 10px;
-      font-size: 2em;
-      color: rgba(255, 0, 0, 0.5);
-      cursor: pointer;
-      background: #18a90778;
-      border-radius: 50px/59px;
-    }
-
-    .donate-icon:hover {
-      color: rgba(255, 0, 0, 1);
-    }
-.reveal {
-  position: relative;
-  display: flex;
-  color: #6ee1f5;
-  font-size: 3.6em;
-  font-family: 'Raleway', sans-serif;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  white-space: pre;
-
-}
-
-
-/* Медиа-запросы для разных размеров экрана */
-@media (max-width: 768px) {
-  .reveal {
-    font-size: 24px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .reveal {
-    font-size: 63px;
-  }
-}
-
-@media (min-width: 1025px) {
-  .reveal {
-      font-size: 3.6em;
-  }
-}
-
-.reveal span {
-  opacity: 0;
-  transform: scale(0);
-  animation: fadeInOut 5s infinite;
-}
-.reveal::before,
-.reveal::after {
-  position: absolute;
-  content: "";
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  height: 100%;
-  background: white;
-  opacity: 0;
-  transform: scale(0);
-}
-
-.reveal::before {
-  left: 50%;
-  animation: slideLeft 1.5s cubic-bezier(0.7, -0.6, 0.3, 1.5) forwards;
-}
-
-.reveal::after {
-  right: 50%;
-  animation: slideRight 1.5s cubic-bezier(0.7, -0.6, 0.3, 1.5) forwards;
-}
-@keyframes fadeInOut {
-  0%, 100% { opacity: 0; transform: scale(0); }
-  50% { opacity: 1; transform: scale(1); }
-}
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0);
-  }
-}
-
-@keyframes slideLeft {
-  to {
-    left: -6%;
-    opacity: 1;
-    transform: scale(0.9);
-  }
-}
-
-@keyframes slideRight {
-  to {
-    right: -6%;
-    opacity: 1;
-    transform: scale(0.9);
-  }
-}
-
-
-</style>
 <div class="center">
     <div class="wrapper">
         <div class="card">
@@ -535,44 +17,53 @@
     </div>
 </div>
 
+<div class="searching">
+    <form id="search" action="{% url 'home' %}" method="GET">
+        <svg viewBox="0 0 420 60" xmlns="http://www.w3.org/2000/svg">
+            <rect class="bart" height=""/>
 
-<div class="slider-container">
+            <g class="magnifier">
+                <circle class="glass" r=""/>
+                <line class="handle" x1="32" y1="32" x2="44" y2="44"></line>
+            </g>
 
-    <div class="reveal" id="textSlider">Почему бы и нет</div>
+            <g class="sparks">
+                <circle class="spark"/>
+                <circle class="spark"/>
+                <circle class="spark"/>
+            </g>
 
+            <g class="burst pattern-one">
+                <circle class="particle circle"/>
+                <path class="particle triangle"/>
+                <circle class="particle circle"/>
+                <path class="particle plus"/>
+                <rect class="particle rect"/>
+                <path class="particle triangle"/>
+            </g>
+            <g class="burst pattern-two">
+                <path class="particle plus"/>
+                <circle class="particle circle"/>
+                <path class="particle triangle"/>
+                <rect class="particle rect"/>
+                <circle class="particle circle"/>
+                <path class="particle plus"/>
+            </g>
+            <g class="burst pattern-three">
+                <circle class="particle circle"/>
+                <rect class="particle rect"/>
+                <path class="particle plus"/>
+                <path class="particle triangle"/>
+                <rect class="particle rect"/>
+                <path class="particle plus"/>
+            </g>
+        </svg>
+        <input type="search" name="q" aria-label="Search for inspiration" required placeholder="Поиск..."/>
+        <!-- <button type="submit">🔍</button> -->
+    </form>
 </div>
 
-<div class="thebest">
-    <h2>Лучшие пользователи:</h2>
-    <div class="features  slider">
-        {% if best_profiles %}
-        {% for profile in best_profiles %}
-        <div class="profile-card">
-            <a href="{% url 'user_profile' profile.user.id %}">
-                <img src="{{ profile.profile_picture.url }}" alt="Profile picture" class="profile-picture">
-                <div class="user-info">
-                    <h3 style="color: white;">{{ profile.first_name }} {{ profile.last_name }}</h3>
-                </div>
-            </a>
-            <div class="user-rating" align="right">
-                {% if profile.avg_rating %}
-                <p style="color: white;">Рейтинг: {{ profile.avg_rating }}/5</p>
-                {% else %}
-                <p>НЕТ ОТЗЫВОВ</p>
-                {% endif %}
-            </div>
-        </div>
-        {% endfor %}
-        {% else %}
-        <h1>Пока что лучших нет!</h1>
-        {% endif %}
-    </div>
-</div>
 
-
-<!--    {% if profiles|length == 0 %}-->
-<!--    <p>Пока что лучших нет!</p>-->
-<!--    {% endif %}-->
 
 <div class="donation-link">
     <a target="_blank" href="https://www.donationalerts.com/r/onnnyxxx">
@@ -582,69 +73,17 @@
 
 
 <footer class="footer">
-    <!--    <div class="waves">-->
-    <!--        <div class="wave" id="wave1"></div>-->
-    <!--        <div class="wave" id="wave2"></div>-->
-    <!--        <div class="wave" id="wave3"></div>-->
-    <!--        <div class="wave" id="wave4"></div>-->
-    <!--    </div>-->
-    <ul class="social-icon">
-        <!--        <li class="social-icon__item"><a class="social-icon__link" target="_blank"-->
-        <!--                                         href="https://t.me/+9oFdLhfKiHU0NGEy">-->
-        <!--            <ion-icon name="logo-telegram"></ion-icon>-->
-        <!--        </a></li>-->
-        <!--        <li class="social-icon__item"><a class="social-icon__link" href="#">-->
-        <!--            <ion-icon name="logo-vk"></ion-icon>-->
-        <!--        </a></li>-->
-        <!--      <li class="social-icon__item"><a class="social-icon__link" href="#">-->
-        <!--          <ion-icon name="logo-linkedin"></ion-icon>-->
-        <!--        </a></li>-->
-        <!--      <li class="social-icon__item"><a class="social-icon__link" href="#">-->
-        <!--          <ion-icon name="logo-instagram"></ion-icon>-->
-        <!--        </a></li>-->
-    </ul>
     <ul class="menu">
-        <!--      <li class="menu__item"><a class="menu__link" href="{% url 'home' %}">Главная страница</a></li>-->
         <li class="menu__item"><a class="menu__link" href="{% url 'about' %}">О нас</a></li>
         <li class="menu__item"><a class="menu__link" href="{% url 'category' %}">Категории</a></li>
         <li class="menu__item"><a class="menu__link" target="_blank" href="https://www.donationalerts.com/r/onnnyxxx">Поддержать
             проект</a></li>
         <li class="menu__item"><a class="menu__link" target="_blank" href="https://t.me/tasks_community">Мы в
             Telegram</a></li>
-
-        <!--      <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>-->
-
     </ul>
     <p>&copy;2024 Все права защищены</p>
 </footer>
+
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script>
-    document.documentElement.style.setProperty('--count', '{{ best_profiles|length }}');
-</script>
-
-<script>
-let phrases = ["Искусство меча", "Почему бы и нет", "Удобство в мелочах"];
-let revealText = document.getElementById("textSlider");
-let index = 0;
-
-function changeText() {
-  revealText.textContent = phrases[index];
-  let letters = revealText.textContent.split("");
-  revealText.innerHTML = "";
-  let middle = letters.filter(e => e !== " ").length / 2;
-  letters.forEach((letter, i) => {
-    let span = document.createElement("span");
-    span.textContent = letter;
-    span.style.animationDelay = `${0.3 + Math.abs(i - middle) * 0.1}s`;
-    revealText.append(span);
-  });
-
-  index = (index + 1) % phrases.length;
-}
-
-setInterval(changeText, 5000); // Меняет текст каждые 5 секунд
-
-
-</script>
 {% endblock %}

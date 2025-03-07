@@ -1,0 +1,79 @@
+.profile-container {
+    display: flex; /* Используем flexbox для вертикального выравнивания */
+    flex-direction: column; /* Вертикальная ориентация */
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    padding: 20px; /* Отступы вокруг контейнера */
+}
+
+.profile-header {
+    display: flex; /* Используем flexbox для горизонтального выравнивания */
+    align-items: center; /* Вертикальное выравнивание элементов */
+    width: 100%; /* Ширина контейнера */
+    max-width: 800px; /* Максимальная ширина контейнера */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+.profile-picture {
+    flex: 0 0 120px; /* Фиксированная ширина для изображения */
+    height: 120px; /* Фиксированная высота */
+    border-radius: 50%; /* Круглая форма изображения */
+    overflow: hidden; /* Скрытие лишнего содержимого */
+    margin-right: 20px; /* Отступ справа от изображения */
+    position: relative; /* Для абсолютного позиционирования кнопки */
+}
+
+.profile-picture img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.edit-button {
+    position: absolute; /* Абсолютное позиционирование для кнопки */
+    bottom: -30px; /* Расположение кнопки под изображением */
+    left: 50%; /* Центрируем кнопку по горизонтали */
+    transform: translateX(-50%); /* Центрируем кнопку относительно ее ширины */
+    padding: 5px 10px; /* Внутренние отступы для кнопки */
+    background-color: #007bff; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    border: none; /* Убираем рамку */
+    border-radius: 5px; /* Закругленные углы */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background-color 0.3s; /* Плавный переход цвета */
+}
+
+.edit-button:hover {
+    background-color: #0056b3; /* Цвет кнопки при наведении */
+}
+
+.profile-info {
+    flex: 1; /* Занимает оставшееся пространство */
+}
+
+.review {
+    border: 1px solid #ddd; /* Рамка вокруг отзыва */
+    border-radius: 5px; /* Закругленные углы */
+    padding: 10px; /* Внутренние отступы для отзыва */
+    margin-top: 10px; /* Отступ сверху для отзыва */
+}
+
+button {
+    margin-top: 20px; /* Отступ сверху для кнопки "Показать комментарии" */
+    padding: 10px 15px; /* Внутренние отступы для кнопки */
+    background-color: #007bff; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    border: none; /* Убираем рамку */
+    border-radius: 5px; /* Закругленные углы */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background-color 0.3s; /* Плавный переход цвета */
+}
+
+button:hover {
+    background-color: #0056b3; /* Цвет кнопки при наведении */
+}
+
+
+
+

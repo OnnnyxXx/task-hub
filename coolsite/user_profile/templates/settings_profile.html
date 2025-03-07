@@ -1,74 +1,15 @@
-{% extends 'tasks_app/layout.html' %}
-
 {% block title %}Настройка профиля{% endblock %}
 
 {% block content %}
 
-<style>
-    .profile-pic {
-        max-width: 157px;
-        max-height: 200px;
-        margin: auto;
-        width: 400;
-        height: auto;
-    }
-
-    .color-btn {
-        border: none;
-        outline: none;
-        background: linear-gradient(90deg, #0045ea, #f0090f);
-        padding: 0.9rem 1rem;
-        border-radius: 50px;
-        color: white;
-        font-size: 1.0rem;
-        box-shadow: 1px 10px 2rem rgba(255, 94, 98, 0.5);
-        transition: all 0.2s ease-in;
-        text-decoration: none;
-    }
-
-    .card {
-        background-color: var(--var-bgcolor);
-        color: var(--var-fontcolor);
-    }
-
-    :root {
-        --var-bgcolor: #fff;
-        --var-fontcolor: #000;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --var-bgcolor: #0B0C10;
-            --var-fontcolor: #eee;
-        }
-    }
-
-    .row {
-        --bs-gutter-x: 0rem;
-    }
-
-    .profile-pic {
-        height: 110px;
-        width: 110px;
-        border-radius: 100%;
-    }
-
-    .alert-danger {
-        width: 80%;
-        --bs-alert-color: #ff0017;
-        --bs-alert-bg: #000000;
-        --bs-alert-border-color: #bf0a1c;
-}
-</style>
-
+{% load static %}
+<link rel="stylesheet" href="{% static 'user_profile/css/profile_settings.css' %}">
 <br>
 <div class="row">
     <div class="col-md-3">
-        <div class="card card-body">
-            <hr>
-            <h3 style="text-align: center">Account Settings</h3>
-            <hr>
-            <img class="profile-pic" id="preview" src="{{ request.user.profile.profile_picture.url }}">
+        <div class="card card-body text-center">
+            <h3>Настройки аккаунта</h3>
+            <img class="profile-picture" id="preview" src="{{ request.user.profile.profile_picture.url }}">
         </div>
     </div>
     <div class="col-md-9">
@@ -77,21 +18,16 @@
                 {% csrf_token %}
                 <input type="file" id="fileInput" name="profile_picture" accept="image/*" onchange="previewImage()">
 
-                <p>Имя: {{ form.first_name }} {% if form.first_name.errors %}
-                <div class="alert alert-danger">{{ form.first_name.errors }}</div>
-                {% endif %}
-                <p>Фамилия: {{ form.last_name }} {% if form.last_name.errors %}
-                <div class="alert alert-danger">{{ form.last_name.errors }}</div>
-                {% endif %}
-                <p>Email: {{ form.email }} {% if form.email.errors %}
-                <div class="alert alert-danger">{{ form.email.errors }}</div>
-                {% endif %}
-                <p>Ваш город: {{ form.city }} {% if form.city.errors %}
-                <div class="alert alert-danger">{{ form.city.errors }}</div>
-                {% endif %}
-                <p>Вк: {{ form.vk_url }}</p>
-                <p>Телеграмм: {{ form.telegram_url }}</p>
-                <p>Youtube: {{ form.youtube_url }}</p>
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="alert alert-danger">{{ field.errors }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
                 <button class='color-btn' type="submit">Сохранить</button>
             </form>
         </div>

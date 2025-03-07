@@ -19,19 +19,21 @@ def settings_profile(request):
         form = ProfileForm(request.POST, request.FILES, instance=profile, user=user)
         if form.is_valid():
             form.save()
-            return redirect('user_home')
+            return redirect('user_profile')
     else:
         form = ProfileForm(instance=profile, user=user)
 
-    context = {'form': form}
+    context = {
+        'form': form,
+        'profile': profile,
+        'show_edit_button': True
+    }
     return render(request, 'settings_profile.html', context)
 
 
-def User_View(request):
-    profile = request.user.profile
+def get_profile_data(request, profile):
     reviews = Comment.objects.filter(profile=profile).order_by('-created_at')
     average_stars = reviews.aggregate(Avg('stars'))['stars__avg']
-
     form = ProfileForm(instance=profile)
 
     if request.method == 'POST':
@@ -40,27 +42,29 @@ def User_View(request):
             form.save()
             return redirect('user_home')
 
-    context = {'form': form, 'reviews': reviews, 'average_stars': average_stars}
+    return form, reviews, average_stars
+
+
+def user_view(request, id=None):
+    if id:  # Если передан id пользователя, получаем его профиль
+        user = get_object_or_404(User, id=id)
+        profile = user.profile
+        show_edit_button = False  # Не показывать кнопку редактирования
+    else:  # Иначе используем профиль текущего пользователя
+        profile = request.user.profile
+        show_edit_button = True  # Показывать кнопку редактирования
+
+    form, reviews, average_stars = get_profile_data(request, profile)
+
+    context = {
+        'form': form,
+        'reviews': reviews,
+        'average_stars': average_stars,
+        'profile': profile,
+        'show_edit_button': show_edit_button
+    }
 
     return render(request, 'home_user.html', context)
-
-
-def user_profile(request, id):
-    user = get_object_or_404(User, id=id)
-    profile = user.profile
-    reviews = Comment.objects.filter(profile=profile).order_by('-created_at')
-    average_stars = reviews.aggregate(Avg('stars'))['stars__avg']
-    form = ProfileForm(instance=profile)
-
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('user_home')
-
-    context = {'form': form, 'profile': profile, 'reviews': reviews, 'average_stars': average_stars}
-
-    return render(request, 'user_profile.html', context)
 
 
 def AddCommentView(request, id):
@@ -71,7 +75,7 @@ def AddCommentView(request, id):
 
         if form.is_valid():
             author = request.user
-            profile = user.profile  # Get the profile of the user being reviewed
+            profile = user.profile
             content = form.cleaned_data['content']
             stars = form.cleaned_data['stars']
             Comment.objects.create(author=author, profile=profile, content=content, stars=stars)
@@ -92,10 +96,8 @@ class CommentUpdateView(UpdateView):
     success_url = reverse_lazy('user_profile', id=User.id)
 
     def dispatch(self, request, *args, **kwargs):
-        # Получить объект комментария
         comment = self.get_object()
 
-        # Проверьте, является ли текущий пользователь автором комментария
         if comment.author != self.request.user:
             return redirect("home")
 
@@ -116,10 +118,8 @@ class CommentDeleteView(DeleteView):
     template_name = 'delete_comment.html'
 
     def dispatch(self, request, *args, **kwargs):
-        # Получить объект комментария
         comment = self.get_object()
 
-        # Проверьте, является ли текущий пользователь автором комментария
         if comment.author != self.request.user:
             return redirect("home")
 
@@ -128,5 +128,4 @@ class CommentDeleteView(DeleteView):
     def get_success_url(self):
         profile = self.object.profile
         user = profile.user
-        # Redirect to the user profile page of the author of the comment
         return reverse_lazy('user_profile', kwargs={'id': user.id})

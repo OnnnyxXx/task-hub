@@ -107,11 +107,11 @@ class TasksDeleteView(DeleteView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class TasksDetailView(DetailView, LoginRequiredMixin):
+class TasksDetailView(DetailView):
     model = Articles
     template_name = 'tasks_app_user/details_tasks.html'
     context_object_name = 'article'
-    raise_exception = True
+
 
 
 def create(request):
