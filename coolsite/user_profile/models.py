@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.contrib.auth.models import User
+from django_resized import ResizedImageField
 
 
 class Profile(models.Model):
@@ -11,9 +12,9 @@ class Profile(models.Model):
     telegram_url = models.URLField(blank=True, null=True)
     youtube_url = models.URLField(blank=True, null=True)
     vk_url = models.URLField(blank=True, null=True)
-    profile_picture = models.ImageField("Изображения", default="profile_pictures/default_profile_picture.jpg",
-                                        null=True,
-                                        blank=True, upload_to='media/profile_pictures')
+    profile_picture = ResizedImageField(force_format="WEBP", quality=75,
+                                        default="profile_pictures/default_profile_picture.jpg"
+                                        ,upload_to="media/profile_pictures")
     city = models.CharField(max_length=100)
 
     def __str__(self):
