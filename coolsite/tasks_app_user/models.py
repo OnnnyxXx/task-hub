@@ -17,7 +17,6 @@ class Articles(models.Model):
     prise = models.CharField('Цена', max_length=15)
     full_text = models.TextField("Задания")
     data = models.DateTimeField(auto_now_add=True)
-    user_name = models.CharField("User_name", max_length=15, )
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)  # Внешний ключ к пользователю
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
@@ -29,8 +28,6 @@ class Articles(models.Model):
         verbose_name_plural = "Задании"
 
     def save(self, *args, **kwargs):
-        if not self.author:
-            self.author = User.objects.get(username=self.user_name)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

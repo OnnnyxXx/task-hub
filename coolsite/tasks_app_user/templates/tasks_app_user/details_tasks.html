@@ -109,7 +109,7 @@ hr {
     <div class="blog_post">
         <div class="container_copy">
             <p>{{ article.full_text|linebreaks|urlize }}</p>
-            {% if article.user_name == user.username %}
+            {% if article.author == request.user %}
                 <a href="{% url 'delete_tasks' article.id %}" class="btn btn-danger">Удалить задания</a>
                 <a href="{% url 'update_tasks' article.id %}" class="btn btn-info">Редактировать задания</a>
             {% endif %}
@@ -129,7 +129,7 @@ hr {
             {% if request.user.is_authenticated %}
             <a href="{% url 'new' article.id %}" class="btn btn-info">Откликнуться</a>
                 {% else %}
-                <p>Что откликнуться зайдите в свой профиль</p>
+                <p style="color: red;">Что откликнуться зайдите в свой профиль</p>
             {% endif %}
         </div>
     </div>

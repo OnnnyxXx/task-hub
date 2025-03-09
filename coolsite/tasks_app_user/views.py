@@ -9,7 +9,6 @@ from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.utils import timezone
@@ -93,7 +92,7 @@ class TasksUpdateView(UpdateView):
 @method_decorator(login_required, name='dispatch')
 class TasksDeleteView(DeleteView):
     model = Articles
-    success_url = reverse_lazy('category')  # Replace with your desired URL
+    success_url = reverse_lazy('category')
     template_name = 'tasks_app_user/delete_tasks.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -111,7 +110,6 @@ class TasksDetailView(DetailView):
     context_object_name = 'article'
 
 
-
 def create(request):
     error = ''
     categories = Category.objects.all()
@@ -122,6 +120,7 @@ def create(request):
 
             selected_category_id = request.POST.get('category')
             article = form.save(commit=False)
+            article.author = request.user
             article.category_id = selected_category_id
             article.save()
 
@@ -130,7 +129,7 @@ def create(request):
         else:
             error = 'Форма была неверной'
 
-    form = ArticlesForm(user=request.user)
+    form = ArticlesForm()
     date = {
         'form': form,
         'error': error,
@@ -138,6 +137,3 @@ def create(request):
     }
 
     return render(request, 'tasks_app_user/create.html', date)
-
-
-
