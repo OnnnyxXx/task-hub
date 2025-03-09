@@ -16,4 +16,4 @@ COPY wait-for-it.sh /app/
 EXPOSE 8000
 
 # Запускаем миграции и сервер разработки
-CMD ["python coolsite/manage.py migrate && python coolsite/manage.py runserver 0.0.0.0:8000"]
+CMD ["bash", "wait-for-it.sh", "db", "5432", "--", "bash", "-c", "python coolsite/manage.py migrate && python coolsite/manage.py runserver 0.0.0.0:8000"]
