@@ -19,7 +19,7 @@ def settings_profile(request):
         form = ProfileForm(request.POST, request.FILES, instance=profile, user=user)
         if form.is_valid():
             form.save()
-            return redirect('user_profile')
+            return redirect('user_home')
     else:
         form = ProfileForm(instance=profile, user=user)
 
@@ -46,13 +46,13 @@ def get_profile_data(request, profile):
 
 
 def user_view(request, id=None):
-    if id:  # Если передан id пользователя, получаем его профиль
+    if id:
         user = get_object_or_404(User, id=id)
         profile = user.profile
-        show_edit_button = False  # Не показывать кнопку редактирования
-    else:  # Иначе используем профиль текущего пользователя
+        show_edit_button = False
+    else:
         profile = request.user.profile
-        show_edit_button = True  # Показывать кнопку редактирования
+        show_edit_button = True
 
     form, reviews, average_stars = get_profile_data(request, profile)
 
@@ -67,7 +67,7 @@ def user_view(request, id=None):
     return render(request, 'home_user.html', context)
 
 
-def AddCommentView(request, id):
+def add_comment_view(request, id):
     user = get_object_or_404(User, id=id)
 
     if request.method == 'POST':
@@ -87,7 +87,6 @@ def AddCommentView(request, id):
     return render(request, 'user_reviews.html', {'form': form, 'user': user})
 
 
-# UpdateComment
 @method_decorator(login_required, name='dispatch')
 class CommentUpdateView(UpdateView):
     model = Comment

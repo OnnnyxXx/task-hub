@@ -11,49 +11,78 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'user_profile/css/profile.css' %}">
 <body>
-    <div class="profile-container">
-        <div class="profile-header">
-            <div class="profile-picture">
-                <img src="{{ profile.profile_picture.url }}" alt="{{ profile.first_name }} {{ profile.last_name }}">
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="profile-picture">
+            <img src="{{ profile.profile_picture.url }}" alt="{{ profile.first_name }} {{ profile.last_name }}">
             {% if show_edit_button %}
-                <a class="edit-button" href="{% url 'profile' %}">Редактировать</a>
-            {% endif %}
-            </div>
-            <div class="profile-info">
-                <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
-                <p>Email: {{ profile.email }}</p>
-                <p>Город: {{ profile.city }}</p>
-                <p>Telegram: <a href="{{ profile.telegram_url }}">{{ profile.telegram_url }}</a></p>
-                <p>YouTube: <a href="{{ profile.youtube_url }}">{{ profile.youtube_url }}</a></p>
-                <p>VK: <a href="{{ profile.vk_url }}">{{ profile.vk_url }}</a></p>
-                <p>Средний рейтинг: {{ average_stars|floatformat:'2'|default:"Нет отзывов" }}</p>
-            </div>
-
-        </div>
-
-        <button id="comments-button">Показать комментарии</button>
-
-        <div id="comments-section" style="display: none;">
-            {% if reviews %}
-                {% for review in reviews %}
-                    <div class="review">
-                        <p>{{ review.content }}</p>
-                        <p>Рейтинг: {{ review.stars }}</p>
-                        <p>Дата: {{ review.created_at }}</p>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>Нет отзывов.</p>
+            <a class="edit-button" href="{% url 'profile' %}">Редактировать</a>
             {% endif %}
         </div>
+
+        <div class="profile-info">
+            <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
+            <p>Email: {{ profile.email }}</p>
+            <p>Город: {{ profile.city }}</p>
+            {% if profile.telegram_url %}
+            <p><a target="_blank" href="{{ profile.telegram_url }}">Telegram</a></p>
+            {% endif %}
+
+            {% if profile.youtube_url %}
+            <p>YouTube <a target="_blank" href="{{ profile.youtube_url }}">{{ profile.youtube_url }}</a></p>
+            {% endif %}
+
+            {% if profile.vk_url %}
+            <p>VK <a target="_blank" href="{{ profile.vk_url }}">{{ profile.vk_url }}</a></p>
+            {% endif %}
+            <p>Средний рейтинг: {{ average_stars|floatformat:'2'|default:"Нет отзывов" }}</p>
+        </div>
+
     </div>
 
-    <script>
-        document.getElementById('comments-button').addEventListener('click', function() {
-            const commentsSection = document.getElementById('comments-section');
-            commentsSection.style.display = commentsSection.style.display === 'none' ? 'block' : 'none';
-        });
-    </script>
+
+    <button id="comments-button">Показать комментарии</button>
+
+    <div id="comments-section" style="display: none;">
+        {% if user.username != profile.user.username %}
+        <button class="glow-on-hover" type="button">
+            <a class="btn btn-dark" href="{% url 'add_comment' profile.user.id %}">Оставить отзыв</a>
+        </button>
+        {% endif %}
+        {% if reviews %}
+        {% for review in reviews %}
+        <div class="review">
+            <div class="profile-picture">
+                <a href="{% url 'user_profile' review.author.id %}">
+                    <img src="{{ review.author.profile.profile_picture.url }}" alt="">
+                    <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
+
+                </a>
+            </div>
+            <p>{{ review.content|linebreaks|urlize }}</p>
+            <p>Рейтинг: {{review.stars}}</p>
+            <p>Дата: {{ review.created_at }}</p>
+            {% if request.user.id == review.author.id %}
+            <div class="comment-actions">
+                <a class="btn btn-dark" href="{% url 'update_comment' review.id %}">Редактировать</a>
+                <a class="btn btn-danger" href="{% url 'delete_comment' review.id %}">Удалить</a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Нет отзывов.</p>
+        {% endif %}
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('comments-button').addEventListener('click', function() {
+        const commentsSection = document.getElementById('comments-section');
+        commentsSection.style.display = commentsSection.style.display === 'none' ? 'block' : 'none';
+    });
+</script>
 </body>
 </html>
 {% endblock %}

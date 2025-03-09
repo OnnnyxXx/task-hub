@@ -189,20 +189,6 @@ side-button-2:hover {
     color: #FFF;
 }
 
-
-.mobile-nav {
-  background: #F1F1F1;
-  position: fixed;
-  bottom: 0;
-  height: 65px;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  transition: transform 0.3s ease;
-  z-index: 1;
-
-}
-
 .bloc-icon {
   display: flex;
   justify-content: center;

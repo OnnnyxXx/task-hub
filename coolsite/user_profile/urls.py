@@ -6,8 +6,9 @@ from .views import *
 
 urlpatterns = [
     path('', views.settings_profile, name='profile'),
-    path('user/', user_view, name='user_home'),  # Для текущего пользователя
-    path('user/<int:id>/', user_view, name='user_profile'),    path('profile_user/<int:id>/add_comment/', views.AddCommentView, name='add_comment'),
+    path('user/', user_view, name='user_home'),
+    path('user/<int:id>/', user_view, name='user_profile'),
+    path('user/<int:id>/add_comment/', views.add_comment_view, name='add_comment'),
     path('comment/update/<int:pk>/', CommentUpdateView.as_view(), name='update_comment'),
     path('comment/delete/<int:pk>/', CommentDeleteView.as_view(), name='delete_comment'),
 ]

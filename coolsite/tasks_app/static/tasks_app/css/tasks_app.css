@@ -52,17 +52,7 @@ body {
 
 /*/////////////////////////////////////*/
 
-.profile-picture {
-          height: 178px;
-          width: 189px;
-          background: linear-gradient(90deg, #ff9966, #ff5e62);
-          z-index: 10;
-          box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
-          border-radius: 100%;
-          margin-right: 15px;
-          text-align: center;
-          margin: 10px auto 20px;
-}
+
 
 .profile-card{
       background: #1F2833;
@@ -78,10 +68,7 @@ body {
         color: white;
     }
 
-    a {
-        text-decoration: none; /* Убираем подчеркивание ссылок */
-        color: #333;
-    }
+
     .card a{
         text-decoration: none;
         color: #66FCF1;
@@ -235,7 +222,7 @@ body {
         }
       .wrapper {
           position: relative;
-          perspective: 40em;
+          perspective: 73em;
           display: grid;
           transform-style: preserve-3d;
           justify-content: center;

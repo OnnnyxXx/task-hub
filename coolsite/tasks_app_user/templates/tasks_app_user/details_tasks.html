@@ -118,13 +118,13 @@ hr {
         <div class="vertical-line"></div>
 
         <div class="container_copy right-content">
-            <p>Что взять с собой: ({{ article.anons }})</p>
+            <p>Что взять с собой: ({{article.anons}})</p>
             <hr>
-            <p>Цена: {{ article.prise }}₽</p>
+            <p>Цена: {{article.prise}}₽</p>
             <hr>
             <p>Связаться: {{ article.phope }}</p>
             <hr>
-            <p>Дата публикации: {{ article.data }}</p>
+            <p>Дата публикации: {{article.data}}</p>
             <hr>
             {% if request.user.is_authenticated %}
             <a href="{% url 'new' article.id %}" class="btn btn-info">Откликнуться</a>

@@ -3,7 +3,6 @@
     background-size: cover; /* Изображение будет масштабироваться */
     background-position: center; /* Центрируем изображение */
     padding: 20px;
-    margin: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -169,20 +168,6 @@
 @keyframes particle-five-move { 0% { transform: rotate(0deg) translate(-5%) scale(0.0001, 0.0001) } 100% { transform: rotate(0deg) translateX(12%) } }
 @keyframes particle-six-move { 0% { transform: rotate(0deg) translate(-5%) scale(0.0001, 0.0001) } 100% { transform: rotate(35deg) translateX(12%) } }
 
-
-
-.bart {
-	width: 100%;
-	height: 100%;
-	ry: 50%;
-	stroke-width: 10;
-	animation: bar-in 900ms 3s both;
-}
-
-@keyframes bar-in {
-	0% { stroke-dasharray: 0 180 0 226 0 405 0 0 }
-	100% { stroke-dasharray: 0 0 181 0 227 0 405 0 }
-}
 
 .magnifier {
 	animation: magnifier-in 600ms 3.6s both;

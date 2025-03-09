@@ -1,26 +1,49 @@
+.profile-picture {
+    flex: 0 0 120px;
+    height: 120px;
+    width: 189px;
+    z-index: 10;
+    border-radius: 100%;
+    text-align: center;
+    margin: 10px auto 20px;
+    overflow: hidden;
+    position: relative;
+    margin-right: 20px;
+
+}
+.profile-picture-comment {
+    flex: 0 0 120px;
+    height: 120px;
+    width: 189px;
+    z-index: 10;
+    box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
+    border-radius: 100%;
+    text-align: center;
+    margin: 10px auto 20px;
+    overflow: hidden;
+    position: relative;
+    margin-right: 20px;
+}
+a {
+   text-decoration: none; /* Убираем подчеркивание ссылок */
+   color: #0adeff;
+}
 .profile-container {
-    display: flex; /* Используем flexbox для вертикального выравнивания */
-    flex-direction: column; /* Вертикальная ориентация */
-    align-items: center; /* Центрируем содержимое по горизонтали */
-    padding: 20px; /* Отступы вокруг контейнера */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
 
 .profile-header {
-    display: flex; /* Используем flexbox для горизонтального выравнивания */
-    align-items: center; /* Вертикальное выравнивание элементов */
-    width: 100%; /* Ширина контейнера */
-    max-width: 800px; /* Максимальная ширина контейнера */
-    margin-bottom: 20px; /* Отступ снизу */
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
 }
 
-.profile-picture {
-    flex: 0 0 120px; /* Фиксированная ширина для изображения */
-    height: 120px; /* Фиксированная высота */
-    border-radius: 50%; /* Круглая форма изображения */
-    overflow: hidden; /* Скрытие лишнего содержимого */
-    margin-right: 20px; /* Отступ справа от изображения */
-    position: relative; /* Для абсолютного позиционирования кнопки */
-}
+
 
 .profile-picture img {
     width: 120px;
@@ -31,49 +54,135 @@
 }
 
 .edit-button {
-    position: absolute; /* Абсолютное позиционирование для кнопки */
-    bottom: -30px; /* Расположение кнопки под изображением */
-    left: 50%; /* Центрируем кнопку по горизонтали */
-    transform: translateX(-50%); /* Центрируем кнопку относительно ее ширины */
-    padding: 5px 10px; /* Внутренние отступы для кнопки */
-    background-color: #007bff; /* Цвет фона кнопки */
-    color: white; /* Цвет текста кнопки */
-    border: none; /* Убираем рамку */
-    border-radius: 5px; /* Закругленные углы */
-    cursor: pointer; /* Указатель при наведении */
-    transition: background-color 0.3s; /* Плавный переход цвета */
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .edit-button:hover {
-    background-color: #0056b3; /* Цвет кнопки при наведении */
+    background-color: #0056b3;
 }
 
 .profile-info {
-    flex: 1; /* Занимает оставшееся пространство */
+    flex: 1;
 }
 
 .review {
-    border: 1px solid #ddd; /* Рамка вокруг отзыва */
-    border-radius: 5px; /* Закругленные углы */
-    padding: 10px; /* Внутренние отступы для отзыва */
-    margin-top: 10px; /* Отступ сверху для отзыва */
+    max-width: 600px;
+    margin: 10px auto;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.review p {
+    margin: 5px 0;
 }
 
 button {
-    margin-top: 20px; /* Отступ сверху для кнопки "Показать комментарии" */
-    padding: 10px 15px; /* Внутренние отступы для кнопки */
-    background-color: #007bff; /* Цвет фона кнопки */
-    color: white; /* Цвет текста кнопки */
-    border: none; /* Убираем рамку */
-    border-radius: 5px; /* Закругленные углы */
-    cursor: pointer; /* Указатель при наведении */
-    transition: background-color 0.3s; /* Плавный переход цвета */
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3; /* Цвет кнопки при наведении */
+    background-color: #0056b3;
 }
 
+/* ######  */
 
+@media (max-width: 766px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+    .profile-picture {
+        flex: 0 0 120px;
+        height: 120px;
+        width: 189px;
+         z-index: 10;
+         border-radius: 100%;
+         text-align: center;
+         margin: 10px auto 20px;
+        overflow: hidden;
+        position: relative;
+    }
+}
 
+/* BUTTON */
+.glow-on-hover {
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
 

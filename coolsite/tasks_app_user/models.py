@@ -29,7 +29,6 @@ class Articles(models.Model):
         verbose_name_plural = "Задании"
 
     def save(self, *args, **kwargs):
-        # Автоматически заполняем поле author при сохранении статьи
         if not self.author:
             self.author = User.objects.get(username=self.user_name)
         super().save(*args, **kwargs)

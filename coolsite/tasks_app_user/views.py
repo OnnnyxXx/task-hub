@@ -97,10 +97,8 @@ class TasksDeleteView(DeleteView):
     template_name = 'tasks_app_user/delete_tasks.html'
 
     def dispatch(self, request, *args, **kwargs):
-        # Get the article object
         Articles = self.get_object()
 
-        # Check if the current user is the owner of the article
         if Articles.author != self.request.user:
             return redirect("category")
 
