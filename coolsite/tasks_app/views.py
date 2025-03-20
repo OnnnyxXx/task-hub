@@ -1,5 +1,6 @@
 from django.db.models import Avg, Q
 from django.shortcuts import render, redirect
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import DetailView, TemplateView, ListView
 from rest_framework import viewsets
@@ -13,7 +14,7 @@ from tasks_app_user.models import Articles, Category
 #     queryset = Profile.objects.annotate(avg_rating=Avg('comment__stars')).order_by('-avg_rating')
 #     serializer_class = ProfileSerializer
 
-
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class HomeViews(ListView):
     model = Articles
     template_name = "tasks_app/index.html"
@@ -37,7 +38,7 @@ class HomeViews(ListView):
 # def index(request):
 #     return render(request, 'tasks_app/index.html')
 
-
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ViewsAbout(ListView):
     template_name = "tasks_app/about.html"
     queryset = ""

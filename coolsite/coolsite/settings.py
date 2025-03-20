@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'user_profile.apps.UserProfileConfig',
     'user_messeges.apps.UserMessegesConfig',
     'rest_framework',
+    'debug_toolbar', #debug
     'corsheaders',
     'pwa'
 
@@ -92,12 +93,20 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # debug toolbar middleware
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
     'corsheaders.middleware.CorsMiddleware',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',  # Add your development machine's IP address here
 ]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
+
 ROOT_URLCONF = 'coolsite.urls'
 
 TEMPLATES = [
