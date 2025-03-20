@@ -15,9 +15,13 @@
     <div class="profile-header">
         <div class="profile-picture">
             <img src="{{ profile.profile_picture.url }}" alt="{{ profile.first_name }} {{ profile.last_name }}">
-            {% if show_edit_button %}
-            <a class="edit-button" href="{% url 'profile' %}">Редактировать</a>
-            {% endif %}
+
+            <div class="settings">
+                {% if show_edit_button %}
+                <a class="edit-button" href="{% url 'profile' %}">Редактировать</a>
+                {% endif %}
+            </div>
+
         </div>
 
         <div class="profile-info">
@@ -55,8 +59,7 @@
             <div class="profile-picture">
                 <a href="{% url 'user_profile' review.author.id %}">
                     <img src="{{ review.author.profile.profile_picture.url }}" alt="">
-                    <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
-
+<!--                    <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>-->
                 </a>
             </div>
             <p>{{ review.content|linebreaks|urlize }}</p>
