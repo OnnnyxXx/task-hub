@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Профиль пользователя</title>
+    {% block title %}Профиль пользователя{% endblock %}
+
 </head>
 
 {% block content %}
@@ -13,12 +14,12 @@
 <body>
 <div class="profile-container">
     <div class="profile-header">
-        <div class="profile-picture">
+        <div class="profile-picture" style="position: relative;">
             <img src="{{ profile.profile_picture.url }}" alt="{{ profile.first_name }} {{ profile.last_name }}">
 
             <div class="settings">
                 {% if show_edit_button %}
-                <a class="edit-button" href="{% url 'profile' %}">Редактировать</a>
+                <a class="edit-button" href="{% url 'profile' %}">⚙</a>
                 {% endif %}
             </div>
 
@@ -33,11 +34,11 @@
             {% endif %}
 
             {% if profile.youtube_url %}
-            <p>YouTube <a target="_blank" href="{{ profile.youtube_url }}">{{ profile.youtube_url }}</a></p>
+            <p><a target="_blank" href="{{ profile.youtube_url }}">YouTube</a></p>
             {% endif %}
 
             {% if profile.vk_url %}
-            <p>VK <a target="_blank" href="{{ profile.vk_url }}">{{ profile.vk_url }}</a></p>
+            <p><a target="_blank" href="{{ profile.vk_url }}">Vk</a></p>
             {% endif %}
             <p>Средний рейтинг: {{ average_stars|floatformat:'2'|default:"Нет отзывов" }}</p>
         </div>
@@ -59,7 +60,7 @@
             <div class="profile-picture">
                 <a href="{% url 'user_profile' review.author.id %}">
                     <img src="{{ review.author.profile.profile_picture.url }}" alt="">
-<!--                    <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>-->
+                    <!--                    <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>-->
                 </a>
             </div>
             <p>{{ review.content|linebreaks|urlize }}</p>

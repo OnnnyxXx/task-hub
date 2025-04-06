@@ -25,14 +25,14 @@ class ProfileForm(forms.ModelForm):
         user = kwargs.pop('user', None)
         super(ProfileForm, self).__init__(*args, **kwargs)
         if user and user.is_authenticated:
-            self.fields['email'].widget.attrs['value'] = user.email or "Ваш email"
-            self.fields['first_name'].widget.attrs['value'] = user.first_name or "Ваше Имя"
-            self.fields['last_name'].widget.attrs['value'] = user.last_name or "Ваша Фамилия"
-            self.fields['city'].widget.attrs['value'] = user.profile.city or "Ваш Город"
+            self.fields['email'].widget.attrs['value'] = user.email
+            self.fields['first_name'].widget.attrs['value'] = user.first_name
+            self.fields['last_name'].widget.attrs['value'] = user.last_name
+            self.fields['city'].widget.attrs['value'] = user.profile.city
 
             if hasattr(user, 'profile'):
                 profile = user.profile
-                self.fields['profile_picture'].widget.attrs['value'] = profile.profile_picture
+                self.fields['city'].widget.attrs['value'] = profile.city
 
     def clean_city(self):
         city = self.cleaned_data.get('city')

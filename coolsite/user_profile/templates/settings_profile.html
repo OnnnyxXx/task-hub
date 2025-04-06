@@ -1,55 +1,128 @@
-{% block title %}Настройка профиля{% endblock %}
+{% extends 'tasks_app/layout.html' %}
+
+{% block title %}Редактировать профиль{% endblock %}
 
 {% block content %}
-
 {% load static %}
 <link rel="stylesheet" href="{% static 'user_profile/css/profile_settings.css' %}">
 <br>
-<div class="row">
-    <div class="col-md-3">
-        <div class="card card-body text-center">
-            <h3>Настройки аккаунта</h3>
-            <img class="profile-picture" id="preview" src="{{ request.user.profile.profile_picture.url }}">
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <div>
+                <h3>Редактировать профиль</h3>
+                <img class="profile-picture" id="preview"
+                     src="{% if request.user.profile.profile_picture %} {{ request.user.profile.profile_picture.url }} {% else %} {% static 'user_profile/img/default_profile.png' %} {% endif %}"
+                     alt="Профильное фото">
+            </div>
         </div>
-    </div>
-    <div class="col-md-9">
-        <div class="card card-body">
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input type="file" id="fileInput" name="profile_picture" accept="image/*" onchange="previewImage()">
+        <div class="col-md-9">
+            <div>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
 
-                {% for field in form %}
                     <div class="form-group">
-                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                        {{ field }}
-                        {% if field.errors %}
-                            <div class="alert alert-danger">{{ field.errors }}</div>
+                        <label for="{{ form.profile_picture.id_for_label }}">Фото профиля:</label>
+                        {{ form.profile_picture }}
+                        {% if form.profile_picture.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.profile_picture.errors }}
+                        </div>
                         {% endif %}
                     </div>
-                {% endfor %}
 
-                <button class='color-btn' type="submit">Сохранить</button>
-            </form>
+
+                    <div class="form-group">
+                        <label for="{{ form.first_name.id_for_label }}">Имя:</label>
+                        {{ form.first_name }}
+                        {% if form.first_name.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.first_name.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.last_name.id_for_label }}">Фамилия:</label>
+                        {{ form.last_name }}
+                        {% if form.last_name.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.last_name.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">Email:</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.email.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.city.id_for_label }}">Город:</label>
+                        {{ form.city }}
+                        {% if form.city.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.city.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.telegram_url.id_for_label }}">Telegram:</label>
+                        {{ form.telegram_url }}
+                        {% if form.telegram_url.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.telegram_url.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.youtube_url.id_for_label }}">YouTube:</label>
+                        {{ form.youtube_url }}
+                        {% if form.youtube_url.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.youtube_url.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.vk_url.id_for_label }}">Vk:</label>
+                        {{ form.vk_url }}
+                        {% if form.vk_url.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.vk_url.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    function previewImage() {
-        var preview = document.getElementById('preview');
-        var fileInput = document.getElementById('fileInput');
-        var file = fileInput.files[0];
-        var reader = new FileReader();
+    const profilePictureInput = document.getElementById('id_profile_picture');
+    const previewImage = document.getElementById('preview');
 
-        reader.onloadend = function () {
-            preview.src = reader.result;
-        };
-
+    profilePictureInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
         if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+            }
             reader.readAsDataURL(file);
-        } else {
-            preview.src = "{{ request.user.profile.profile_picture.url }}";
         }
-    }
+    });
 </script>
+
 {% endblock %}
