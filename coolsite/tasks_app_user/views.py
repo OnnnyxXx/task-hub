@@ -11,7 +11,7 @@ from django.db.models import Count
 from .models import *
 
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
+# @method_decorator(cache_page(60 * 15), name='dispatch')
 class TaskView(ListView):
     model = Articles
     template_name = "tasks_app_user/tasks_home.html"

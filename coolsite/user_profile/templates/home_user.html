@@ -64,7 +64,16 @@
                 </a>
             </div>
             <p>{{ review.content|linebreaks|urlize }}</p>
-            <p>Рейтинг: {{review.stars}}</p>
+            <p>Рейтинг:
+                {% for star in review.star_range %}
+                <span class="star">★</span>
+                {% endfor %}
+                {% for star in review.empty_star_range %}
+                <span class="star">☆</span>
+                {% endfor %}
+            </p>
+
+
             <p>Дата: {{ review.created_at }}</p>
             {% if request.user.id == review.author.id %}
             <div class="comment-actions">

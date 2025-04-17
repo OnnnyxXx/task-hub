@@ -74,10 +74,10 @@ h3, h4, p {
 }
 #no-tasks-message {
     display: none;
-    text-align: center; /* Выравниваем текст по центру */
-    font-size: 1.2rem; /* Увеличиваем размер шрифта */
-    margin-top: 20px; /* Добавляем отступ сверху для разделения от других элементов */
-    color: Black; /* Цвет текста можно настроить по вашему выбору */
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    color: Black;
 }
     .return-arrow {
         text-decoration: none;
@@ -128,16 +128,23 @@ h3, h4, p {
     width: 130px;
     border-radius: 50px;
 }
-
+.city_filters{
+    position: absolute;
+    top: 91px;
+    right: 12px;
+}
 @media screen and (max-width: 767px){
   .city {
     top: 11px;
     right: 3px;
   }
-  #city_filter {
-
-    top: 110px;
-    right: -2px;
+  .city_filters {
+    top: 32px;
+    right: 7px;
+  }
+  .col {
+    font-size: 0;
+    width: 46px;
   }
 }
 </style>
@@ -157,8 +164,8 @@ h3, h4, p {
 
 <div class="features">
     <form method="GET">
-        <div>
-            <select id="city_filter" name="city" onchange="filterTasks(this.value)" style="position: absolute; top: 56px; right: 1px;">
+        <div class="city_filters">
+            <select id="city_filter" name="city" onchange="filterTasks(this.value)">
                 <option value="">Все города</option>
                 {% for city in unique_cities %}
                     <option value="{{ city }}">{{ city }}</option>

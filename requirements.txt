@@ -37,3 +37,4 @@ zope.interface==6.1
 psycopg2-binary
 gunicorn
 django-resized
+django-debug-toolbar==5.0.1

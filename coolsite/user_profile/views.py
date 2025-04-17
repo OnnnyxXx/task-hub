@@ -56,6 +56,11 @@ def user_view(request, id=None):
 
     form, reviews, average_stars = get_profile_data(request, profile)
 
+    # Передаем диапазоны для звезд
+    for review in reviews:
+        review.star_range = range(1, review.stars + 1)
+        review.empty_star_range = range(review.stars + 1, 6)
+
     context = {
         'form': form,
         'reviews': reviews,
