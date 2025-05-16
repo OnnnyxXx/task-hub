@@ -1,6 +1,6 @@
 from .city import cities_of_russia
 from .models import Profile, Comment
-from django.forms import ModelForm, TextInput, Textarea, EmailInput, URLInput
+from django.forms import TextInput, Textarea
 from django import forms
 
 

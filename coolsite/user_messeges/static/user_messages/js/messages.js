@@ -24,12 +24,9 @@ const messageElement = document.createElement('div');
 
  messageContainer.innerHTML = `
  <div class="messages">
-     <img class="profile-pic" src="${jsonData.user_info.profile_image_url}">
-
-     <p>${jsonData.message}</p>
-<!--      <div class="time_mess" align="right">${jsonData.time}</div>-->
+        <img class="profile-pic" src="${jsonData.user_info.profile_image_url}">
+        <p>${jsonData.message.replace(/\n/g, '<br>')}</p>
   </div>
-  <hr>
 `;
 
     chatContainer.appendChild(messageContainer);

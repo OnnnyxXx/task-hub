@@ -17,8 +17,10 @@
         </svg>
     </a>
     <a href="{% url 'user_profile' interlocutor.id %}" class="user-link">
-        <img class="profile-pic" src="{{ interlocutor.profile.profile_picture.url }}">
-        {{ interlocutor.profile.first_name }} {{ interlocutor.profile.last_name }}
+        {% with profile=interlocutor.profile %}
+        <img class="profile-pic" src="{{ profile.profile_picture.url }}">
+        {{ profile.first_name }} {{ profile.last_name }}
+        {% endwith %}
     </a>
     <div class="dropdown">
         <button class="dropbtn">⋮</button>
@@ -54,7 +56,7 @@
     {% csrf_token %}
     <div id="message-input-container">
         <img id="profile-pic" class="profile-pic" src="{{ request.user.profile.profile_picture.url }}">
-        <input id="message-input" type="text" name="content" placeholder="Введите сообщение" required>
+        <textarea id="message-input" name="content" placeholder="Введите сообщение" required></textarea>
         <button type="submit" class="send-button" style="background-color: #0040FF; border-radius: 50%; padding: 5px 10px;
          color: white; margin-left: 120px;">
             ➤
@@ -62,5 +64,5 @@
     </div>
 </form>
 
-<script src="{% static 'user_messeges/js/messages.js' %}"></script>
+<script src="{% static 'user_messages/js/messages.js' %}"></script>
 {% endblock %}
